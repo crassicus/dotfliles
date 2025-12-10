@@ -1,0 +1,9 @@
+[user]
+	email = carlostobon@tutanota.de
+	name = crassicus
+[init]
+	defaultBranch = main
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff

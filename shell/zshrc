@@ -1,0 +1,68 @@
+# Change directory with just the directory name
+setopt AUTO_CD
+
+# Set the location of the history file
+HISTFILE=~/.zsh_history
+
+# Set the maximum number of lines contained in the history file
+HISTSIZE=50000
+
+# Set the maximum number of lines to save in memory during a session
+SAVEHIST=50000
+
+# Append to the history file instead of overwriting it
+setopt APPEND_HISTORY
+
+# Write history immediately, not at shell exit
+setopt INC_APPEND_HISTORY
+
+# Share history between all sessions
+setopt SHARE_HISTORY
+
+# Set Vim as the default text editor
+export EDITOR=vim
+
+# Set Qutebroweser as the default browser
+export BROWSER=qutebrowser
+
+# Directory for configurations
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Set common variables
+export DC="$HOME/Documents"
+export DW="$HOME/Downloads"
+export CF="$HOME/.config"
+export DT="$HOME/.dotfiles"
+
+
+# Add directories for custom binaries, Rust tools, and local
+# user scripts to the PATH
+export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# Allow Python access to repos in local folder
+export PYTHONPATH="$(echo $HOME/.local/repos/python/*/src | tr ' ' ':'):$PYTHONPATH"
+
+# Custom prompt function
+function custom_prompt() {
+  if [[ $PWD == $HOME ]]; then
+    echo ""
+  elif ! [[ -z $BRANCH ]]; then
+    echo " ${PWD/#$HOME/~} [󰘬 ${BRANCH}]"
+  else
+    echo " ${PWD/#$HOME/~}"
+  fi
+}
+
+# Precmd hook to update PS1 before every command
+function precmd() {
+  PS1="🦀$(custom_prompt) -> "
+}
+
+[[ -f ~/.aliasrc ]] && source ~/.aliasrc
+[[ -f ~/.zshinputrc ]] && source ~/.zshinputrc
+[[ -f ~/.utils ]] && source ~/.utils
+
+autoload -Uz compinit
+compinit -C
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

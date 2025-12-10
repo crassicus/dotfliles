@@ -1,0 +1,34 @@
+# Set root and branch env vars when possible
+
+# First approach is to try to find a hidden `git` folder
+holder="$PWD"
+while [ "$holder" != "" ]; do
+  [ -d "$holder/.git" ] && {
+    export ROOT="$holder"
+
+    current_branch=$(git branch | grep -oP '\*\s+\K\S+')
+    export BRANCH="$current_branch"
+    return
+
+  }
+    # Extract one block from the `holder`
+    holder="${holder%/*}"
+done
+
+# When git is not found, try with any of these files
+holder="$PWD"
+project_files=("Cargo.toml" "package.json" "pyproject.toml")
+while [ "$holder" != "" ]; do
+
+    for file in "${project_files[@]}"; do
+        [ -f "$holder/$file" ] && {
+            export ROOT="$holder" BRANCH=""
+            return
+        }
+    done
+
+    # Extract one block from the `holder`
+    holder="${holder%/*}"
+done
+
+export ROOT="$PWD" BRANCH=""

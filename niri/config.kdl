@@ -1,0 +1,75 @@
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/eras/Downloads/real.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            variant "colemak_dh"
+            options "caps:super"
+        }
+        repeat-rate 80
+        repeat-delay 250
+    }
+}
+
+window-rule {
+    clip-to-geometry true
+    geometry-corner-radius 12
+}
+
+prefer-no-csd
+
+layout {
+    center-focused-column "on-overflow"
+    always-center-single-column
+    empty-workspace-above-first
+    default-column-width { proportion 0.6; }
+
+    preset-column-widths {
+        proportion 0.25
+        proportion 0.325
+        proportion 0.50
+        proportion 0.60
+    }
+
+    struts {
+        left 64
+        right 64
+        top 56
+        bottom 56
+    }
+
+    focus-ring {
+        on
+        width 4
+        active-color "#FF7F00"
+    }
+}
+
+binds {
+    Super+Return { spawn "alacritty"; }
+    Super+F { spawn "qutebrowser"; }
+    Super+S repeat=false { close-window; }
+    Super+N { focus-column-left; }
+    Super+I { focus-column-right; }
+    Super+U { focus-workspace-up; }
+    Super+E { focus-workspace-down; }
+    Super+O { toggle-overview; }
+    Super+T { center-column; }
+    Super+M { move-column-left; }
+    Super+L { fullscreen-window; }
+
+    Super+Space { maximize-column; }
+    Super+Comma { switch-preset-column-width; }
+    Super+Slash { move-column-to-workspace-down; }
+    Super+Period { move-column-to-workspace-up; }
+    Super+Semicolon { expand-column-to-available-width; }
+
+    Super+Apostrophe { spawn "wtype" "-P" "Escape" "-p" "Escape"; }
+    Super+P { spawn "wtype" "-M" "ctrl" "c"; }
+
+}

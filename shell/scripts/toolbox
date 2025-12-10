@@ -1,0 +1,46 @@
+#!/bin/env bash
+
+record_audio(){
+  ffmpeg -f alsa \
+  -i default \
+  -ac 1 \
+  "audio-$(date +%H_%M_%S).wav"
+}
+
+record_screen(){
+  ffmpeg -y \
+  -f x11grab -i :0.0 \
+  -f alsa -i default \
+  -ac 1 \
+  -vf yadif \
+  -codec:v libx264 \
+  -crf 1 \
+  -bf 2 \
+  -flags +cgop \
+  -pix_fmt yuv420p \
+  -codec:a aac \
+  -strict -2 \
+  -b:a 384k \
+  -r:a 48000 \
+  "video-$(date +%H_%M_%S).mov"
+}
+
+capture_screen(){
+	maim -f png "picture-$(date +%H_%M_%S).png"
+}
+
+case $1 in
+  record-audio   )  record_audio   ;;
+  record-screen  )  record_screen  ;;
+  capture-screen )  capture_screen ;;
+  *) cat << EOF
+tb: toolbox, a collection of useful utilities related
+to recording audio and video from current session.
+
+Allowed options:
+  record-audio     Start recording audio.
+  record-screen    Start recording screen (audio included).
+  capture-screen   Take a screen-shot of current screen.
+
+EOF
+esac

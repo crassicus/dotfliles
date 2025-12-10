@@ -1,0 +1,170 @@
+# Enable vi mode
+bindkey -v
+
+bindkey -M vicmd 'm' backward-char
+bindkey -M vicmd 'i' forward-char
+
+bindkey -M vicmd 'a' vi-insert
+bindkey -M viins 'aa' vi-cmd-mode
+
+# Move to the beginning of the next word
+bindkey -M vicmd 's' forward-word
+
+# Move to the beginning of the previous word
+bindkey -M vicmd 'r' backward-word
+
+# Fix Backspace in vi insert mode
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^H' backward-delete-char
+
+# Delete char and enter insert mode
+bindkey -M vicmd 'f' vi-substitute
+
+# Delete line and enter insert mode
+bindkey -M vicmd 'S' vi-change-whole-line
+
+# Move up and down in shell history
+function vi-up-line-or-history() {
+    zle up-line-or-history
+    zle beginning-of-line
+}
+zle -N vi-up-line-or-history
+
+function vi-down-line-or-history() {
+    zle down-line-or-history
+    zle beginning-of-line
+}
+zle -N vi-down-line-or-history
+
+bindkey -M vicmd 'e' vi-up-line-or-history
+bindkey -M vicmd 'n' vi-down-line-or-history
+
+# Change cursor in vi normal and insert mode
+function zle-line-init zle-keymap-select {
+  case $KEYMAP in
+    vicmd) echo -ne "\e[4 q" ;;
+    main|viins) echo -n "\e[6 q" ;;
+  esac
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Remove text from the current position to the end of the line
+# and enter insert mode
+function ci-to-end() {
+  zle kill-line
+  zle vi-insert
+}
+zle -N ci-to-end
+bindkey -M vicmd 'ci' ci-to-end
+
+# Remove text from the current position to the beginning of the line
+# and enter insert mode
+function ci-to-beginning() {
+  zle backward-kill-line
+  zle vi-insert
+}
+zle -N ci-to-beginning
+bindkey -M vicmd 'cm' ci-to-beginning
+
+
+# Jump to the beggining of line and enter insert mode
+function jump-to-beginning-insert() {
+  zle beginning-of-line
+  zle vi-insert
+}
+zle -N jump-to-beginning-insert
+bindkey -M vicmd 'A' jump-to-beginning-insert
+
+# Jump to the end of line and enter insert mode
+function jump-to-end-insert() {
+  zle end-of-line
+  zle vi-insert
+}
+zle -N jump-to-end-insert
+bindkey -M vicmd 'R' jump-to-end-insert
+
+# Delete the word under cursor and enter insert mode
+function delete-current-word() {
+  if [[ "${LBUFFER: -1}" == " " ]]; then
+    zle delete-word
+    zle vi-insert
+  else
+    zle backward-word
+    zle delete-word
+    zle vi-insert
+  fi
+}
+zle -N delete-current-word
+bindkey -M vicmd 'cw' delete-current-word
+
+
+# Declares abbreviations as an associative array
+typeset -A abbreviations
+abbreviations=(
+  # Github
+  "gi"   "git init"
+  "gg"   "git status"
+  "gl"   "git log --all --graph"
+  "gb"   "git branch"
+  "gs"   "git switch"
+  "go"   "git checkout"
+  "gc"   'git commit -m "|"'
+  "gp"   "git pull"
+  "gh"   "git push"
+  "ga"   "git add"
+  "gd"   "git diff"
+  "gr"   "git restore"
+  "gt"   "git stash"
+  "gm"   "git merge"
+
+  # GPG Keys
+  "gk"  "gpg --list-keys --keyid-format long"
+
+  # Cargo
+  "ci"  "cargo init"
+  "cx"  "cargo run"
+  "ca"  "cargo add"
+  "ct"  "cargo test"
+	"cr"  "cargo build --release"
+  "cw"  "cargo watch -x check -x test -x run"
+
+  # Tmux
+	"to" "tmux attach -t 0"
+)
+
+function expand-abbreviation-foo() {
+  local lastword="${LBUFFER##* }"
+  local expansion="${abbreviations[$lastword]}"
+
+  # Check if there is an expansion for `lastword`
+  if [[ -n "${expansion}" ]]; then
+    # Remove `lastword` and replace it with its corresponded abbreviation
+    LBUFFER="${LBUFFER%$lastword}${expansion}"
+  fi
+
+  # When the expansion contains `|`
+  if [[ -n "${expansion}" && "${expansion}" == *"|"* ]]; then
+    # Everything after `|` becomes the new righ buffer
+    RBUFFER="${LBUFFER#*|}"
+
+    # Everything before `|` becomes the new left buffer
+    LBUFFER="${LBUFFER%%|*}"
+
+    # Leave to not reach the self-insert action which will
+    # add an extra space
+    return
+  fi
+
+  # Insert the key you just typed, in this case will be space which
+  # is the expansion trigger
+  zle self-insert
+}
+
+zle -N expand-abbreviation-foo
+bindkey " " expand-abbreviation-foo
+
+chpwd() {
+    source rootfinder
+}

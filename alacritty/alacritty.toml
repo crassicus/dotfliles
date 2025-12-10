@@ -1,0 +1,161 @@
+[window]
+padding = { x = 25, y = 25 }
+
+[font]
+normal = { family = "Comic Mono", style = "normal"}
+bold = { family = "Comic Mono", style = "bold"}
+size = 28
+offset = { y = 3 }
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Beam", blinking = "always" }
+vi_mode_style = { shape = "Underline", blinking = "always" }
+blink_interval = 350
+blink_timeout = 20
+
+[scrolling]
+history = 100000
+
+[keyboard]
+bindings = [
+  #{ key = "u", mods = "Super", action = "ScrollLineUp" },
+  #{ key = "l", mods = "Super", action = "ScrollLineDown" },
+  { key = "h", mods = "Super", action = "Paste" },
+  { key = "-", mods = "Super", action = "DecreaseFontSize" },
+  { key = "=", mods = "Super", action = "IncreaseFontSize" },
+  { key = "y", mods = "Super", action = "ToggleViMode" },
+
+  { key = "e", mode = "Vi|~Search", action = "Up" },
+  { key = "n", mode = "Vi|~Search", action = "Down" },
+  { key = "m", mode = "Vi|~Search", action = "Left" },
+  { key = "i", mode = "Vi|~Search", action = "Right" },
+  { key = "e", mods = "Shift", mode = "Vi|~Search", action = "SearchPrevious" },
+  { key = "n", mods = "Shift", mode = "Vi|~Search", action = "SearchNext" },
+  { key = "q", mode = "Vi", action = "WordLeft" },
+
+]
+
+# Firewatch Light - Alacritty Theme
+# Based on the Vim theme "two-firewatch" by Ramzi Akremi
+
+[colors.primary]
+background = "#FAF8F5"
+foreground = "#896724"
+
+[colors.cursor]
+text = "#FAF8F5"
+cursor = "#447EBB"
+
+[colors.selection]
+text = "#2d2006"
+background = "#E5DDCB"
+
+[colors.normal]
+black   = "#2d2006"
+red     = "#e05252"
+green   = "#43d08a"
+yellow  = "#e0c285"
+blue    = "#065289"
+magenta = "#718ecd"
+cyan    = "#447EBB"
+white   = "#B6ad9a"
+
+[colors.bright]
+black   = "#896724"
+red     = "#e05252"
+green   = "#43d08a"
+yellow  = "#e0c285"
+blue    = "#065289"
+magenta = "#718ecd"
+cyan    = "#447EBB"
+white   = "#FAF8F5"
+
+[colors.dim]
+black   = "#2d2006"
+red     = "#B29762"
+green   = "#43d08a"
+yellow  = "#e0c285"
+blue    = "#065289"
+magenta = "#718ecd"
+cyan    = "#447EBB"
+white   = "#EAE1D2"
+
+[colors.search.matches]
+foreground = "#2d2006"
+background = "#E5DDCB"
+
+[colors.search.focused_match]
+foreground = "#FAF8F5"
+background = "#447EBB"
+
+[colors.line_indicator]
+foreground = "#FAF8F5"
+background = "#F3EFE7"
+
+[colors.footer_bar]
+background = "#EAE1D2"
+foreground = "#2d2006"
+
+# Firewatch Dark - Alacritty Theme
+# Based on the Vim theme "two-firewatch" by Ramzi Akremi
+
+#[colors.primary]
+#background = "#282c34"
+#foreground = "#abb2bf"
+
+#[colors.cursor]
+#text = "#282c34"
+#cursor = "#56b6c2"
+
+#[colors.selection]
+#text = "#d6e9ff"
+#background = "#3e4452"
+
+#[colors.normal]
+#black   = "#282c34"
+#red     = "#e06c75"
+#green   = "#98c379"
+#yellow  = "#e5c07b"
+#blue    = "#61afef"
+#magenta = "#c678dd"
+#cyan    = "#56b6c2"
+#white   = "#dcdfe4"
+
+#[colors.bright]
+#black   = "#636d83"
+#red     = "#e06c75"
+#green   = "#98c379"
+#yellow  = "#e5c07b"
+#blue    = "#61afef"
+#magenta = "#c678dd"
+#cyan    = "#56b6c2"
+#white   = "#ffffff"
+
+#[colors.dim]
+#black   = "#2c323c"
+#red     = "#dd672c"
+#green   = "#98c379"
+#yellow  = "#e0c285"
+#blue    = "#56b6c2"
+#magenta = "#c8ae9d"
+#cyan    = "#56b6c2"
+#white   = "#abb2bf"
+
+#[colors.search.matches]
+#foreground = "#d6e9ff"
+#background = "#3e4452"
+
+#[colors.search.focused_match]
+#foreground = "#282c34"
+#background = "#56b6c2"
+
+#[colors.line_indicator]
+#foreground = "#abb2bf"
+#background = "#2c323c"
+
+#[colors.footer_bar]
+#background = "#636d83"
+#foreground = "#dcdfe4"

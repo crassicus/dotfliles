@@ -1,0 +1,34 @@
+vim9script
+
+autocmd FileType python
+        \ nnoremap <buffer> hhx
+        \ :!clear; python main.py
+
+autocmd FileType python
+      \ nnoremap <buffer> tn
+      \ ms:ToggleFnReturnType<cr>
+
+# autocmd FileType
+#         \ python xmap kk
+#         \ <Plug>SlimeRegionSend
+# autocmd FileType
+#         \ python nmap kk
+#         \ <Plug>SlimeParagraphSend
+
+
+# ==== Semantic shortcuts ====
+
+
+import "../general/scripts.vim" as utils
+
+autocmd FileType python
+        \ inoreabbrev <expr> <buffer> pr
+        \ utils.Wrapper("print(f\"{}\")<esc>F{i")
+
+autocmd FileType python
+        \ inoreabbrev <expr> <buffer> fn
+        \ utils.Wrapper("def ():<esc>F(i")
+
+autocmd FileType python
+        \ inoreabbrev <expr> <buffer> ifn
+        \ utils.Wrapper("if __name__ == \"__main__\":")

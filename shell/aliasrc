@@ -1,0 +1,57 @@
+# General shortcuts
+
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rf="rm -rf" \
+	ls="eza" \
+	lb="lsblk" \
+	cl="clear" \
+	t="touch" \
+	a="cd .." \
+	c="cd" \
+	b="cd \$ROOT" \
+	k="cd \$OLDPWD" \
+	tm="cd /tmp" \
+  dc="cd ~/Documents" \
+  dw="cd ~/Downloads" \
+	dt="cd ~/.dotfiles" \
+	ds="cd ~/.dotfiles && v run.sh" \
+	zh="v ~/.zsh_history" \
+  y="lf" \
+
+alias \
+	xmr="xmonad --recompile && xmonad --restart" \
+	to="tmux attach -t 0" \
+  z="zathura" \
+	gk="gpg --list-keys --keyid-format long" \
+  nf="neofetch" \
+	sdn="sudo shutdown -h now" \
+	rb="sudo reboot" \
+
+
+# Git
+alias \
+  gg="git status" \
+  gb="git branch" \
+  gl="git log --all --graph" \
+  gs="git switch" \
+  go="git checkout" \
+  gc='git commit -m "|"' \
+  gp="git pull" \
+  gu="git push origin" \
+  ga="git add" \
+  gd="git diff" \
+  gr="git restore" \
+  gt="git stash" \
+  gm="git merge" \
+  gi="git init"
+
+# Rust
+alias \
+	ci="cargo init" \
+	cx="cargo run" \
+	ca="cargo add" \
+  ct="cargo test" \
+	cr="cargo build --release" \
+	cw="cargo watch -x check -x test -x run" \

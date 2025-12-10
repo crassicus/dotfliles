@@ -1,0 +1,47 @@
+#!/usr/bin/bash
+
+origin=$1
+destination=$2
+
+# Check if rsync is installed
+if ! [ -x "$(command -v rsync)" ]; then
+  echo >&2 "Error: rsync is not installed."
+  exit 1
+fi
+
+# Check if the number of arguments is equal to two
+! [ "$#" -eq 2 ] &&
+  printf "Usage:\n  ship <origin> <destination> \n" &&
+  exit 1
+
+# Check if `origin` is a folder and `destination` a file
+[ -d "$origin" ] && [ -f "$destination" ] &&
+  echo "Error: Origin is a folder and destination a file." &&
+  exit 1
+
+
+# Case:
+# `origin` is a file and `destination` a file or folder
+[ -f "$origin" ] && rsync -urvP "$origin" "$destination" && exit 0
+
+# `origin` is a folder and `destination` a folder
+if [ -d "$origin" ] && [ -d "$destination" ]; then
+
+  # Keep the top level folder
+  origin_folder=$(basename "$origin")
+  destination_folder="$destination/$origin_folder"
+
+  mkdir "$destination_folder" ||
+    echo "Failed to create directory: $destination_folder"
+
+  max_jobs=8
+  for entry in "$origin"/*; do
+    # Wait if we're at the job limit before starting a new one
+    while (( $(jobs -r -p | wc -l) >= max_jobs )); do
+      wait -n
+    done
+    rsync -urvP "$entry" "$destination_folder" &
+  done
+fi
+
+wait # Wait the remaining jobs to complete
