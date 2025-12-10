@@ -1,17 +1,9 @@
 vim9script
 
-# ==== General Scripts ====
-
-# ==== Global variables ====
 g:nerdtree_is_open = false
 g:fugitive_is_open = false
 
 
-# ------------------------------------------------
-# Searches upward for patterns, moves the cursor to the
-# match, and returns the line number if found or -1 otherwise.
-# Stops at the first match in the given list.
-# ------------------------------------------------
 export def SearchUpwards(patterns: list<string>): number
     var original_position = getpos(".")
     var current_line_number = line(".")
@@ -32,11 +24,7 @@ export def SearchUpwards(patterns: list<string>): number
 enddef
 command! -nargs=* SearchUpwards call SearchUpwards([<f-args>])
 
-# ------------------------------------------------
-# Searches downward for patterns, moves the cursor to the
-# match, and returns the line number if found or -1 otherwise.
-# Stops at the first match in the given list.
-# ------------------------------------------------
+
 export def SearchDownwards(patterns: list<string>): number
     var original_position = getpos(".")
     var current_line_number = line(".")
@@ -57,10 +45,7 @@ export def SearchDownwards(patterns: list<string>): number
 enddef
 command! -nargs=* SearchDownwards call SearchDownwards([<f-args>])
 
-# ------------------------------------------------
-# Creates a file or directory within the ROOT folder
-# as the base directory.
-# ------------------------------------------------
+
 def CreateEntry(entries: list<string>)
     g:entries = entries
     py3 << EOF
@@ -76,9 +61,7 @@ EOF
 enddef
 command! -nargs=* CreateEntry call CreateEntry([<f-args>])
 
-# ------------------------------------------------
-#  Handle toggling for NerdTree
-# ------------------------------------------------
+
 def ToggleNerdTree(): void
   if g:nerdtree_is_open == true
 
@@ -105,9 +88,6 @@ enddef
 command! -nargs=0 ToggleNerdTree call ToggleNerdTree()
 
 
-# ------------------------------------------------
-#  Handle toggling for Fugitive
-# ------------------------------------------------
 def ToggleFugitive(): void
   if g:fugitive_is_open == true
       execute "normal! :quit\<cr>"
@@ -120,9 +100,6 @@ enddef
 command! -nargs=0 ToggleFugitive call ToggleFugitive()
 
 
-# ------------------------------------------------
-# Add 10 empty lines to the end of the file
-# ------------------------------------------------
 def Spaces(): void
     var view = winsaveview()
     execute "normal! G"
@@ -134,20 +111,15 @@ def Spaces(): void
 enddef
 command! -nargs=0 Spaces call Spaces()
 
-# ------------------------------------------------
-#  Vertical diff for current file.
-#  You can pass a branch name or certain number of
-#  commits ago
-# ------------------------------------------------
-def Gverdiff(parameter: string): void
 
+def Gverdiff(parameter: string): void
   if parameter == ""
     execute "Gvdiffsplit HEAD~0:%"
     echo "Comparing with last commit." | return
   endif
 
-  # This function returns 0 when is not able to parse
-  # the given string into an integer number
+  # Returns 0 when is not able to parse the given string into
+  # an integer number
   var argument = str2nr(parameter)
 
   if argument < 0
@@ -165,10 +137,7 @@ def Gverdiff(parameter: string): void
 enddef
 command! -nargs=? Gverdiff call Gverdiff(<q-args>)
 
-# ------------------------------------------------
-#  Run a specified command in the terminal within
-#  the ROOT directory.
-# ------------------------------------------------
+
 def CommandFromRoot(args: list<string>)
     var args_string = join(args, " ")
     var command = $"cd {expand('$ROOT')} && {args_string}"
@@ -176,10 +145,7 @@ def CommandFromRoot(args: list<string>)
 enddef
 command! -nargs=* CommandFromRoot call CommandFromRoot([<f-args>])
 
-# ------------------------------------------------
-#  Add underscore at the beginning of the word the
-#  cursor is on
-# ------------------------------------------------
+
 def CommentWord()
     var view = winsaveview()
 
@@ -196,9 +162,7 @@ def CommentWord()
 enddef
 command! -nargs=0 CommentWord call CommentWord()
 
-# ------------------------------------------------
-#  Capitalize and Decapitalize current word
-# ------------------------------------------------
+
 def ToggleWord()
     var view = winsaveview()
     var word = expand("<cword>")
@@ -215,12 +179,9 @@ def ToggleWord()
     execute "normal! ciw" .. first_letter .. rest_of_word
     winrestview(view)
 enddef
-
 command! -nargs=0 ToggleWord call ToggleWord()
 
-# ------------------------------------------------
-#  Breaks brackets
-# ------------------------------------------------
+
 def BreakBrackets()
     var line_content = getline(line("."))
 
@@ -234,10 +195,7 @@ def BreakBrackets()
 enddef
 command! -nargs=0 BreakBracketst call BreakBrackets()
 
-# ------------------------------------------------
-# Counts the number of times an expression is found
-# in a given line
-# ------------------------------------------------
+
 export def CountMatches(line: string, expresion: string): number
   var count = 0
   var position = 0
@@ -257,9 +215,7 @@ export def CountMatches(line: string, expresion: string): number
   return count
 enddef
 
-# ------------------------------------------------
-# Yank the current file's  path
-# ------------------------------------------------
+
 def YankCurrentPath(): void
     @+ = expand('%')
     if @+ == ""
@@ -271,9 +227,7 @@ def YankCurrentPath(): void
 enddef
 command! -nargs=0 YankCurrentPath call YankCurrentPath()
 
-# ------------------------------------------------
-# Close NerdTree on quiting
-# ------------------------------------------------
+
 def CloseNerdTreeOnQuit(): void
     if winnr('$') == 2 && exists("t:NERDTreeBufName") == 1
         execute "NERDTreeClose"
@@ -285,9 +239,7 @@ augroup CloseOnExit
     autocmd QuitPre * call CloseNerdTreeOnQuit()
 augroup END
 
-# ------------------------------------------------
-# Open NerdTree automatically
-# ------------------------------------------------
+
 def StartNerdTree(): void
     if &columns > 88 && g:nerdtree_is_open == false
         execute "silent normal! :ToggleNerdTree\<cr>"
@@ -295,18 +247,14 @@ def StartNerdTree(): void
 enddef
 autocmd VimEnter * ++once call StartNerdTree()
 
-# ------------------------------------------------
-# Move between NerdTree and the current file
-# ------------------------------------------------
+
 def GoToNerdTreeWindow(): void
     execute "silent normal! :NERDTreeRefreshRoot\<cr>"
     call feedkeys("\<C-w>w", "n")
 enddef
 command! -nargs=0 GoToNerdTreeWindow call GoToNerdTreeWindow()
 
-# ------------------------------------------------
-# Switch buffer when it's not on nerdtree buffer
-# ------------------------------------------------
+
 def SwitchToBuffer(): void
     if bufname() !~ "NERD_tree_"
         call feedkeys("\<C-6>", "n")
@@ -314,9 +262,7 @@ def SwitchToBuffer(): void
 enddef
 command! -nargs=0 SwitchToBuffer call SwitchToBuffer()
 
-# ------------------------------------------------
-# Only close when out of nerdtree
-# ------------------------------------------------
+
 def CloseSaving(): void
     if bufname() !~ "NERD_tree_"
         call feedkeys("ZZ", "n")
@@ -324,9 +270,7 @@ def CloseSaving(): void
 enddef
 command! -nargs=0 CloseSaving call CloseSaving()
 
-# ------------------------------------------------
-# Only close and save when out of nerdtree
-# ------------------------------------------------
+
 def CloseNotSaving(): void
     if bufname() !~ "NERD_tree_"
         call feedkeys("ZQ", "n")
@@ -335,16 +279,10 @@ enddef
 command! -nargs=0 CloseNotSaving call CloseNotSaving()
 
 
-# ------------------------------------------------
-# Remove abbreviations extra space.
-# ------------------------------------------------
 export def Wrapper(input: string): string
     call feedkeys("\<BS>", "n")
     return input
 enddef
 
 
-# ------------------------------------------------
-# Compile functions
-# ------------------------------------------------
 defcompile
