@@ -61,4 +61,5 @@ def PyCommandComplete(ArgLead: string, CmdLine: string, CursorPos: number): list
 enddef
 
 
-autocmd FileType typescriptreact command -nargs=* -complete=customlist,PyCommandComplete ImportFromLib :python3 import_from_lib(<f-args>)
+autocmd FileType typescriptreact command! -nargs=* -complete=customlist,PyCommandComplete ImportFromLib :python3 import_from_lib(<f-args>)
+defcompile

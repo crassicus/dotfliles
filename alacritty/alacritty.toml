@@ -41,121 +41,40 @@ bindings = [
 # Firewatch Light - Alacritty Theme
 # Based on the Vim theme "two-firewatch" by Ramzi Akremi
 
-[colors.primary]
-background = "#FAF8F5"
-foreground = "#896724"
 
 [colors.cursor]
 text = "#FAF8F5"
-cursor = "#447EBB"
+cursor = "#d65d0e"
+#cursor = "#b16286"
 
-[colors.selection]
-text = "#2d2006"
-background = "#E5DDCB"
 
+# Colors (Gruvbox dark)
+
+# Default colors
+[colors.primary]
+# hard contrast background = = '#1d2021'
+background = '#282828'
+# soft contrast background = = '#32302f'
+foreground = '#ebdbb2'
+
+# Normal colors
 [colors.normal]
-black   = "#2d2006"
-red     = "#e05252"
-green   = "#43d08a"
-yellow  = "#e0c285"
-blue    = "#065289"
-magenta = "#718ecd"
-cyan    = "#447EBB"
-white   = "#B6ad9a"
+black   = '#282828'
+red     = '#cc241d'
+green   = '#98971a'
+yellow  = '#d79921'
+blue    = '#458588'
+magenta = '#b16286'
+cyan    = '#689d6a'
+white   = '#a89984'
 
+# Bright colors
 [colors.bright]
-black   = "#896724"
-red     = "#e05252"
-green   = "#43d08a"
-yellow  = "#e0c285"
-blue    = "#065289"
-magenta = "#718ecd"
-cyan    = "#447EBB"
-white   = "#FAF8F5"
-
-[colors.dim]
-black   = "#2d2006"
-red     = "#B29762"
-green   = "#43d08a"
-yellow  = "#e0c285"
-blue    = "#065289"
-magenta = "#718ecd"
-cyan    = "#447EBB"
-white   = "#EAE1D2"
-
-[colors.search.matches]
-foreground = "#2d2006"
-background = "#E5DDCB"
-
-[colors.search.focused_match]
-foreground = "#FAF8F5"
-background = "#447EBB"
-
-[colors.line_indicator]
-foreground = "#FAF8F5"
-background = "#F3EFE7"
-
-[colors.footer_bar]
-background = "#EAE1D2"
-foreground = "#2d2006"
-
-# Firewatch Dark - Alacritty Theme
-# Based on the Vim theme "two-firewatch" by Ramzi Akremi
-
-#[colors.primary]
-#background = "#282c34"
-#foreground = "#abb2bf"
-
-#[colors.cursor]
-#text = "#282c34"
-#cursor = "#56b6c2"
-
-#[colors.selection]
-#text = "#d6e9ff"
-#background = "#3e4452"
-
-#[colors.normal]
-#black   = "#282c34"
-#red     = "#e06c75"
-#green   = "#98c379"
-#yellow  = "#e5c07b"
-#blue    = "#61afef"
-#magenta = "#c678dd"
-#cyan    = "#56b6c2"
-#white   = "#dcdfe4"
-
-#[colors.bright]
-#black   = "#636d83"
-#red     = "#e06c75"
-#green   = "#98c379"
-#yellow  = "#e5c07b"
-#blue    = "#61afef"
-#magenta = "#c678dd"
-#cyan    = "#56b6c2"
-#white   = "#ffffff"
-
-#[colors.dim]
-#black   = "#2c323c"
-#red     = "#dd672c"
-#green   = "#98c379"
-#yellow  = "#e0c285"
-#blue    = "#56b6c2"
-#magenta = "#c8ae9d"
-#cyan    = "#56b6c2"
-#white   = "#abb2bf"
-
-#[colors.search.matches]
-#foreground = "#d6e9ff"
-#background = "#3e4452"
-
-#[colors.search.focused_match]
-#foreground = "#282c34"
-#background = "#56b6c2"
-
-#[colors.line_indicator]
-#foreground = "#abb2bf"
-#background = "#2c323c"
-
-#[colors.footer_bar]
-#background = "#636d83"
-#foreground = "#dcdfe4"
+black   = '#928374'
+red     = '#fb4934'
+green   = '#b8bb26'
+yellow  = '#fabd2f'
+blue    = '#83a598'
+magenta = '#d3869b'
+cyan    = '#8ec07c'
+white   = '#ebdbb2'

@@ -9,7 +9,7 @@ set hidden
 set autoread
 set nostartofline
 set termguicolors
-set background=light
+set background=dark
 set pumheight=5
 set nohlsearch
 
@@ -37,4 +37,4 @@ let &t_EI = "\e[4 q"
 let &t_SI = "\e[5 q"
 let &t_SR = "\e[4 q"
 
-colorscheme two-firewatch
+colorscheme gruvbox

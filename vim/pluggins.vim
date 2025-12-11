@@ -51,7 +51,7 @@ let g:ale_rust_rustfmt_options = '--edition 2021'
 
 " ==== Lightline ====
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]

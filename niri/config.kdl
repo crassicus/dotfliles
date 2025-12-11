@@ -4,6 +4,11 @@ hotkey-overlay {
     skip-at-startup
 }
 
+cursor {
+    xcursor-theme "wayland-cursor"
+    xcursor-size 36
+}
+
 input {
     keyboard {
         xkb {
@@ -46,7 +51,7 @@ layout {
     focus-ring {
         on
         width 4
-        active-color "#FF7F00"
+        active-color "#d65d0e"
     }
 }
 

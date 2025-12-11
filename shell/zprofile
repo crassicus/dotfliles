@@ -1,14 +1,10 @@
 
 # zprofile
 
+
 # Load .zshrc
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 
-# Initiate graphical server if not running yet
-#if [ "$(tty)" = "/dev/tty1" ]; then
-  #pgrep -x xmonad || exec startx
-#fi
-# ~/.bash_profile  (or ~/.zprofile if you use zsh)
 if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
-    exec dbus-run-session niri --session
+    pgrep -x niri || exec dbus-run-session niri --session
 fi
