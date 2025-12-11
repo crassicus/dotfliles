@@ -1,0 +1,6 @@
+To set pyrefly
+
+[tool.pyrefly.errors]
+unannotated-parameter = true
+unannotated-return = true
+implicit-any = true

@@ -21,16 +21,16 @@ let g:ale_linters = {
       \ 'rust': ['analyzer'],
       \ 'sh': ['shellcheck'],
       \ 'python': ['pyrefly'],
-      \ 'typescript': ['biome', 'tsserver'],
-      \ 'typescriptreact': ['biome', 'tsserver'],
+      \ 'typescript': ['eslint', 'tsserver'],
+      \ 'typescriptreact': ['eslint', 'tsserver'],
       \ }
 
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'rust': ['rustfmt'],
       \ 'python': ['ruff_format'],
-      \ 'typescript': ['biome'],
-      \ 'typescriptreact': ['biome'],
+      \ 'typescript': ['prettier'],
+      \ 'typescriptreact': ['prettier'],
       \ 'css': ["prettier"],
       \ 'html': ["prettier"],
       \ }
