@@ -83,7 +83,7 @@ autocmd FileType rust
       \ utils.Wrapper("async fn () {}\<esc>F(i")
 
 autocmd FileType rust
-      \ inoreabbrev <expr> <buffer> eq
+      \ inoreabbrev <expr> <buffer> ae
       \ utils.Wrapper("assert_eq!(, );\<esc>T(i")
 
 autocmd FileType rust
@@ -95,7 +95,7 @@ autocmd FileType rust
       \ utils.Wrapper("struct x {}<esc>Fxcw")
 
 autocmd FileType rust
-      \ inoreabbrev <expr> <buffer> as
+      \ inoreabbrev <expr> <buffer> ra
       \ utils.Wrapper("assert!();\<esc>T(i")
 
 autocmd FileType rust
