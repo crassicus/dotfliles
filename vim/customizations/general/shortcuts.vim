@@ -107,10 +107,13 @@ vnoremap // :s/
 nnoremap /  ms/
 nnoremap ?  ms?
 
-nnoremap dp {<down>V}d
-nnoremap cp {<down>V}s
+nnoremap d' F"df"
+nnoremap di D
+nnoremap dm d^
+nnoremap dp {d}
+nnoremap cp {c}
 nnoremap vp {<down>V}
-nnoremap yp mt{v}y`t
+nnoremap yp mt{<down>y}`t
 nnoremap gg msgg
 nnoremap G  msG
 
