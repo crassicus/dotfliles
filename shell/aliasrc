@@ -3,7 +3,6 @@
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
-	rf="rm -rf" \
 	ls="eza" \
 	lb="lsblk" \
 	cl="clear" \
@@ -23,7 +22,7 @@ alias \
 alias \
 	xmr="xmonad --recompile && xmonad --restart" \
 	to="tmux attach -t 0" \
-  z="zathura" \
+  z="zathura-full" \
 	gk="gpg --list-keys --keyid-format long" \
   nf="neofetch" \
 	sdn="sudo shutdown -h now" \

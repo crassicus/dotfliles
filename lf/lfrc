@@ -6,8 +6,8 @@ map D delete
 
 cmd open ${{
     case $(file --mime-type -Lb "$f") in
-        application/epub+zip)       zathura  "$fx";;
-        application/pdf)            zathura  "$fx";;
+        application/epub+zip)       zathura-full  "$fx";;
+        application/pdf)            zathura-full  "$fx";;
         inode/x-empty)              vim      "$fx";;
         text/plain)                 vim      "$fx";;
         video/*)                    mpv      "$fx";;
