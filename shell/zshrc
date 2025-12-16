@@ -38,7 +38,7 @@ export DT="$HOME/.dotfiles"
 # Add directories for custom binaries, Rust tools, and local
 # user scripts to the PATH
 export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Allow Python access to repos in local folder
 export PYTHONPATH="$(echo $HOME/.local/repos/python/*/src | tr ' ' ':'):$PYTHONPATH"
