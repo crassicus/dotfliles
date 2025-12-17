@@ -1,4 +1,4 @@
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/eras/Downloads/real.png"
+spawn-at-startup "swaybg" "-i" "/home/eras/.config/wallpaper/wallpaper.png"
 
 hotkey-overlay {
     skip-at-startup
